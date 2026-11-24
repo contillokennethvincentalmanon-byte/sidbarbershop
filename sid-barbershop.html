@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sid Barbershop | Classic Cuts & Clean Shaves</title>
+<meta name="description" content="Sid Barbershop – premium haircuts, fades, hot towel shaves and beard grooming. Book your chair online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e0e0f;
+    --bg-2:#151517;
+    --card:#1b1b1e;
+    --line:#2a2a2e;
+    --text:#ecebe6;
+    --muted:#a3a299;
+    --gold:#c9a24b;
+    --gold-2:#e4c677;
+    --red:#b8322a;
+    --radius:14px;
+    --head:'Oswald','Arial Narrow',Impact,sans-serif;
+    --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:76px}
+  body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased}
+  img,svg{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  .container{width:min(1140px,92%);margin-inline:auto}
+  section{padding:96px 0}
+  h1,h2,h3,h4{font-family:var(--head);text-transform:uppercase;letter-spacing:.04em;line-height:1.15;font-weight:600}
+  .eyebrow{font-family:var(--head);color:var(--gold);letter-spacing:.3em;font-size:.85rem;text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .eyebrow::before{content:"";width:36px;height:2px;background:var(--gold)}
+  .section-title{font-size:clamp(2rem,4.5vw,3rem);margin-bottom:14px}
+  .section-sub{color:var(--muted);max-width:620px}
+  .center{text-align:center}
+  .center .eyebrow{justify-content:center}
+  .center .eyebrow::before{display:none}
+  .center .section-sub{margin-inline:auto}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--head);letter-spacing:.12em;text-transform:uppercase;font-size:.95rem;font-weight:500;padding:14px 30px;border-radius:4px;border:2px solid var(--gold);cursor:pointer;transition:.25s;background:var(--gold);color:#111}
+  .btn:hover{background:var(--gold-2);border-color:var(--gold-2);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--text);border-color:var(--text)}
+  .btn.ghost:hover{background:var(--text);color:#111}
+
+  /* NAV */
+  header{position:fixed;inset:0 0 auto 0;z-index:50;transition:.3s}
+  header.scrolled{background:rgba(14,14,15,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--head);font-size:1.5rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+  .logo span{color:var(--gold)}
+  .pole{width:12px;height:30px;border-radius:6px;border:2px solid var(--text);background:repeating-linear-gradient(-45deg,var(--red) 0 6px,#fff 6px 12px,#2457a6 12px 18px);background-size:100% 36px;animation:spin 1.2s linear infinite}
+  @keyframes spin{to{background-position:0 36px}}
+  .menu{display:flex;align-items:center;gap:30px}
+  .menu a{font-family:var(--head);text-transform:uppercase;letter-spacing:.1em;font-size:.92rem;color:var(--muted);transition:.2s}
+  .menu a:hover,.menu a.active{color:var(--gold)}
+  .menu .btn{padding:10px 20px;color:#111}
+  .menu .btn:hover{color:#111}
+  .burger{display:none;background:none;border:0;cursor:pointer;width:34px;height:26px;position:relative}
+  .burger span{position:absolute;left:0;width:100%;height:2px;background:var(--text);transition:.3s}
+  .burger span:nth-child(1){top:2px}.burger span:nth-child(2){top:12px}.burger span:nth-child(3){top:22px}
+  .burger.open span:nth-child(1){top:12px;transform:rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){top:12px;transform:rotate(-45deg)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 80px;
+    background:
+      radial-gradient(900px 500px at 85% 20%,rgba(201,162,75,.18),transparent 60%),
+      radial-gradient(700px 500px at 0% 100%,rgba(184,50,42,.14),transparent 60%),
+      var(--bg)}
+  .hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 22px,rgba(255,255,255,.015) 22px 44px);pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;position:relative;z-index:1}
+  .hero h1{font-size:clamp(2.8rem,8vw,5.8rem);margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--gold)}
+  .hero p.lead{color:var(--muted);font-size:1.1rem;max-width:520px;margin-bottom:30px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:38px}
+  .status{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-size:.88rem;margin-bottom:22px}
+  .dot{width:10px;height:10px;border-radius:50%;background:#777}
+  .status.open .dot{background:#3ecf6e;box-shadow:0 0 0 0 rgba(62,207,110,.6);animation:pulse 1.8s infinite}
+  .status.closed .dot{background:#e0524a}
+  @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(62,207,110,0)}100%{box-shadow:0 0 0 0 rgba(62,207,110,0)}}
+  .stats{display:flex;gap:40px;flex-wrap:wrap}
+  .stats div strong{display:block;font-family:var(--head);font-size:2.2rem;color:var(--gold)}
+  .stats div span{color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.1em}
+
+  .hero-art{display:grid;place-items:center}
+  .badge{width:min(380px,80vw);aspect-ratio:1;border-radius:50%;position:relative;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,#25252a,#111);border:2px solid var(--gold);box-shadow:0 0 0 10px rgba(201,162,75,.08),0 30px 80px rgba(0,0,0,.6)}
+  .badge::before{content:"";position:absolute;inset:14px;border-radius:50%;border:1px dashed rgba(201,162,75,.5)}
+  .badge-inner{text-align:center}
+  .badge-inner small{font-family:var(--head);letter-spacing:.4em;color:var(--gold);font-size:.8rem}
+  .badge-inner h3{font-size:3.6rem;letter-spacing:.06em;margin:6px 0}
+  .badge-inner p{color:var(--muted);letter-spacing:.3em;font-size:.75rem;text-transform:uppercase}
+
+  /* MARQUEE */
+  .marquee{background:var(--gold);color:#111;overflow:hidden;white-space:nowrap;padding:14px 0;font-family:var(--head);text-transform:uppercase;letter-spacing:.2em;font-weight:600}
+  .marquee div{display:inline-block;animation:scroll 28s linear infinite}
+  .marquee span{margin:0 26px}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr;max-width:820px;margin-inline:auto}
+  .about p{color:var(--muted);margin-bottom:18px}
+  .features{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .feature{display:flex;gap:12px;align-items:flex-start}
+  .feature i{font-style:normal;color:var(--gold);font-size:1.3rem}
+  .feature b{display:block;font-family:var(--head);letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+  .feature span{color:var(--muted);font-size:.9rem}
+
+  /* SERVICES */
+  .services{background:var(--bg-2)}
+  .tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:36px 0}
+  .tab{background:transparent;border:1px solid var(--line);color:var(--muted);padding:10px 22px;border-radius:999px;cursor:pointer;font-family:var(--head);letter-spacing:.1em;text-transform:uppercase;font-size:.9rem;transition:.2s}
+  .tab:hover{color:var(--text);border-color:var(--gold)}
+  .tab.active{background:var(--gold);color:#111;border-color:var(--gold)}
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .service{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:.3s;position:relative;overflow:hidden}
+  .service:hover{transform:translateY(-6px);border-color:var(--gold)}
+  .service .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+  .service h3{font-size:1.25rem}
+  .price{font-family:var(--head);color:var(--gold);font-size:1.4rem;white-space:nowrap}
+  .service p{color:var(--muted);font-size:.93rem}
+  .service small{display:block;margin-top:14px;color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+  .service.hide{display:none}
+
+  /* TEAM */
+  .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin:46px auto 0;max-width:820px}
+  .barber{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-align:center;transition:.3s;border-top:3px solid var(--gold)}
+  .barber:hover{transform:translateY(-6px);border-color:var(--gold)}
+  .barber .info{padding:32px 24px}
+  .barber h3{font-size:1.4rem}
+  .barber .role{color:var(--gold);font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;margin:4px 0 10px}
+  .barber p{color:var(--muted);font-size:.92rem}
+  .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .chips span{border:1px solid var(--line);padding:4px 12px;border-radius:999px;font-size:.75rem;color:var(--muted)}
+
+  /* BOOKING */
+  .booking{background:var(--bg-2)}
+  .book-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
+  .hours{margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .hours h4{font-size:1.1rem;margin-bottom:14px;color:var(--gold)}
+  .hours li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:.95rem}
+  .hours li:last-child{border:0}
+  .hours li.today{color:var(--gold);font-weight:600}
+  .contact-list{margin-top:24px;display:grid;gap:14px}
+  .contact-list li{display:flex;gap:14px;align-items:flex-start;color:var(--muted)}
+  .contact-list i{font-style:normal;font-family:var(--head);text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;color:var(--gold);min-width:68px;padding-top:3px}
+  form{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:34px}
+  form h3{font-size:1.6rem;margin-bottom:6px}
+  form > p{color:var(--muted);margin-bottom:22px;font-size:.93rem}
+  .field{margin-bottom:16px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  label{display:block;font-family:var(--head);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;color:var(--muted);margin-bottom:6px}
+  input,select{width:100%;background:#101012;border:1px solid var(--line);color:var(--text);padding:13px 14px;border-radius:8px;font:inherit;transition:.2s}
+  input:focus,select:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.15)}
+  select option{background:#101012}
+  .err{color:#ff7a72;font-size:.8rem;margin-top:4px;min-height:1em}
+  .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .slot{background:#101012;border:1px solid var(--line);color:var(--text);padding:9px 0;border-radius:8px;cursor:pointer;font:inherit;font-size:.85rem;transition:.2s}
+  .slot:hover:not(:disabled){border-color:var(--gold)}
+  .slot.sel{background:var(--gold);color:#111;border-color:var(--gold);font-weight:600}
+  .slot:disabled{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+  .summary{background:#101012;border:1px dashed var(--gold);border-radius:8px;padding:14px 16px;margin:6px 0 18px;font-size:.92rem;color:var(--muted);display:none}
+  .summary b{color:var(--text)}
+  form .btn{width:100%}
+  .success{display:none;text-align:center;padding:30px 10px}
+  .success .check{width:70px;height:70px;border-radius:50%;background:var(--gold);color:#111;display:grid;place-items:center;font-size:2rem;margin:0 auto 18px}
+  .success p{color:var(--muted);margin:10px 0 22px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:50px 0 28px;background:#0a0a0b}
+  .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+  .foot p{color:var(--muted);max-width:340px;font-size:.92rem;margin-top:12px}
+  .copy{margin-top:36px;text-align:center;color:var(--muted);font-size:.82rem;border-top:1px solid var(--line);padding-top:22px}
+
+  .to-top{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;background:var(--gold);color:#111;border:0;cursor:pointer;font-size:1.2rem;opacity:0;pointer-events:none;transition:.3s;z-index:40}
+  .to-top.show{opacity:1;pointer-events:auto}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:960px){
+    .hero-grid,.about-grid,.book-grid{grid-template-columns:1fr}
+    .hero-art{order:-1}
+    .badge{width:240px}
+    .badge-inner h3{font-size:2.4rem}
+    .service-grid,.team-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:760px){
+    section{padding:70px 0}
+    .burger{display:block}
+    .menu{position:fixed;inset:72px 0 auto 0;background:rgba(14,14,15,.98);flex-direction:column;padding:26px;gap:20px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.35s}
+    .menu.open{transform:none}
+    .service-grid,.team-grid,.features,.two{grid-template-columns:1fr}
+    .slots{grid-template-columns:repeat(3,1fr)}
+    form{padding:24px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="container nav">
+    <a href="#home" class="logo" aria-label="Sid Barbershop home"><i class="pole"></i>Sid<span>Barbershop</span></a>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="menu" id="menu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#team">Barbers</a>
+      <a href="#booking" class="btn">Book Now</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="status" id="status"><i class="dot"></i><span id="statusText">Checking hours…</span></div>
+      <h1>Look sharp.<br>Feel <em>sharper.</em></h1>
+      <p class="lead">Sid Barbershop is where classic craftsmanship meets modern style. Precision fades, hot towel shaves and beard work — done right, every single time.</p>
+      <div class="hero-cta">
+        <a href="#booking" class="btn">Book Your Chair</a>
+        <a href="#services" class="btn ghost">View Services</a>
+      </div>
+      <div class="stats">
+        <div><strong data-count="25" data-plus="1">0</strong><span>Years of craft</span></div>
+        <div><strong data-count="8500" data-plus="1">0</strong><span>Happy clients</span></div>
+        <div><strong data-count="5">0</strong><span>Star rating</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="badge">
+        <div class="badge-inner">
+          <small>EST. 2001</small>
+          <h3>SID</h3>
+          <p>Barbershop</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div>
+    <span>Fades</span>•<span>Classic Cuts</span>•<span>Hot Towel Shave</span>•<span>Beard Trim</span>•<span>Kids Cuts</span>•<span>Hair Color</span>•
+    <span>Fades</span>•<span>Classic Cuts</span>•<span>Hot Towel Shave</span>•<span>Beard Trim</span>•<span>Kids Cuts</span>•<span>Hair Color</span>•
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="reveal">
+      <div class="eyebrow">Our Story</div>
+      <h2 class="section-title">More than a haircut.<br>It's a ritual.</h2>
+      <p>Sid Barbershop opened in 2001 on Pavia St. in Roxas City with a simple idea: every man deserves to walk out feeling confident. Over the years we've become a neighborhood favorite, a place where friends catch up, stories get told, and the fade is always clean.</p>
+      <p>Our barbers combine old-school technique with today's trends, using premium products and sterilized tools for a safe, comfortable experience.</p>
+      <div class="features">
+        <div class="feature"><i>✔</i><div><b>Skilled Barbers</b><span>Trained in modern and classic styles</span></div></div>
+        <div class="feature"><i>✔</i><div><b>Clean &amp; Safe</b><span>Sanitized tools for every client</span></div></div>
+        <div class="feature"><i>✔</i><div><b>Premium Products</b><span>Quality pomades, oils &amp; balms</span></div></div>
+        <div class="feature"><i>✔</i><div><b>Relaxed Vibe</b><span>Good music, cold drinks, no rush</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="center reveal">
+      <div class="eyebrow">What We Do</div>
+      <h2 class="section-title">Services &amp; Pricing</h2>
+      <p class="section-sub">Straightforward prices. Premium results. Pick what you need or bundle it for the full treatment.</p>
+    </div>
+    <div class="tabs reveal" id="tabs">
+      <button class="tab active" data-f="all">All</button>
+      <button class="tab" data-f="hair">Hair</button>
+      <button class="tab" data-f="beard">Beard &amp; Shave</button>
+      <button class="tab" data-f="extra">Extras</button>
+    </div>
+    <div class="service-grid" id="serviceGrid"></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="center reveal">
+      <div class="eyebrow">The Crew</div>
+      <h2 class="section-title">Meet Your Barbers</h2>
+      <p class="section-sub">Two barbers, one standard of quality. Choose your barber when you book.</p>
+    </div>
+    <div class="team-grid">
+      <article class="barber reveal">
+        <div class="info">
+          <h3>Sid</h3>
+          <div class="role">Founder · Master Barber</div>
+          <p>Behind the chair since 2001. Known for razor-sharp fades and classic gentleman cuts.</p>
+          <div class="chips"><span>Skin Fade</span><span>Classic Cut</span><span>Hot Shave</span></div>
+        </div>
+      </article>
+      <article class="barber reveal">
+        <div class="info">
+          <h3>Kenneth</h3>
+          <div class="role">Barber</div>
+          <p>Clean lines, modern styles and careful beard work. Kenneth makes sure every client leaves looking sharp.</p>
+          <div class="chips"><span>Taper Fade</span><span>Beard Trim</span><span>Kids Cuts</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="container book-grid">
+    <div class="reveal">
+      <div class="eyebrow">Reserve</div>
+      <h2 class="section-title">Book Your Chair</h2>
+      <p class="section-sub">Pick a service, barber and time. We'll confirm your slot right away. Walk-ins are welcome too, subject to availability.</p>
+
+      <div class="hours">
+        <h4>Opening Hours</h4>
+        <ul id="hoursList"></ul>
+      </div>
+      <ul class="contact-list">
+        <li><i>Address</i><span>Pavia St., Roxas City, Capiz</span></li>
+        <li><i>Phone</i><span><a href="tel:+639662764488">0966 276 4488</a></span></li>
+        <li><i>Email</i><span><a href="mailto:kennethvincentcontilloict12@gmail.com" style="word-break:break-all">kennethvincentcontilloict12@gmail.com</a></span></li>
+      </ul>
+    </div>
+
+    <div class="reveal">
+      <form id="bookForm" novalidate>
+        <h3>Appointment</h3>
+        <p>Fill in the details below.</p>
+
+        <div class="two">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" placeholder="Juan Dela Cruz" autocomplete="name">
+            <div class="err" data-for="name"></div>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" placeholder="09XX XXX XXXX" autocomplete="tel">
+            <div class="err" data-for="phone"></div>
+          </div>
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="service">Service</label>
+            <select id="service"></select>
+            <div class="err" data-for="service"></div>
+          </div>
+          <div class="field">
+            <label for="barber">Barber</label>
+            <select id="barber">
+              <option value="">Select barber</option>
+              <option>Any available</option>
+              <option>Sid</option>
+              <option>Kenneth</option>
+            </select>
+            <div class="err" data-for="barber"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="date">Date</label>
+          <input id="date" type="date">
+          <div class="err" data-for="date"></div>
+        </div>
+
+        <div class="field">
+          <label>Time</label>
+          <div class="slots" id="slots"></div>
+          <div class="err" data-for="time"></div>
+        </div>
+
+        <div class="summary" id="summary"></div>
+        <button class="btn" type="submit">Confirm Booking</button>
+      </form>
+
+      <div class="success" id="success">
+        <div class="check">✓</div>
+        <h3>You're booked!</h3>
+        <p id="successMsg"></p>
+        <button class="btn ghost" id="again" type="button">Book Another</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot">
+      <div>
+        <a href="#home" class="logo"><i class="pole"></i>Sid<span>Barbershop</span></a>
+        <p>Classic cuts, clean shaves and good company. Come in as a customer, leave as family.</p>
+      </div>
+    </div>
+    <div class="copy">© <span id="year"></span> Sid Barbershop. All rights reserved.</div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- DATA ---------- */
+  const SERVICES = [
+    {n:'Classic Haircut', p:250, t:'30 min', c:'hair',  d:'Scissor and clipper cut tailored to your head shape, finished with a style.'},
+    {n:'Skin / Taper Fade', p:300, t:'45 min', c:'hair', d:'Seamless blend from skin to length with sharp, clean lines.'},
+    {n:'Kids Cut (under 12)', p:200, t:'30 min', c:'hair', d:'Gentle, patient cuts for the little gentlemen.'},
+    {n:'Hot Towel Shave', p:280, t:'30 min', c:'beard', d:'Straight-razor shave with warm towels, lather and soothing balm.'},
+    {n:'Beard Trim & Shape', p:200, t:'20 min', c:'beard', d:'Defined edges and a shape that suits your face.'},
+    {n:'Haircut + Beard Combo', p:450, t:'60 min', c:'beard', d:'The full treatment: cut, beard trim and finishing touches.'},
+    {n:'Hair Color / Dye', p:800, t:'90 min', c:'extra', d:'Cover grays or go bold with a fresh color.'},
+    {n:'Hair Wash & Massage', p:120, t:'15 min', c:'extra', d:'Relaxing shampoo and scalp massage.'},
+    {n:'Hot Towel Facial', p:220, t:'25 min', c:'extra', d:'Deep clean and refresh to leave your skin feeling new.'}
+  ];
+  const HOURS = [ // index = JS getDay(): 0 Sun
+    {d:'Sunday',    o:10, c:18},
+    {d:'Monday',    o:9,  c:20},
+    {d:'Tuesday',   o:9,  c:20},
+    {d:'Wednesday', o:9,  c:20},
+    {d:'Thursday',  o:9,  c:20},
+    {d:'Friday',    o:9,  c:21},
+    {d:'Saturday',  o:9,  c:21}
+  ];
+  const peso = n => '₱' + n.toLocaleString('en-PH');
+  const fmtH = h => { const ap = h>=12?'PM':'AM'; const x = h%12||12; return x+':00 '+ap; };
+  const fmtSlot = (h,m) => { const ap=h>=12?'PM':'AM'; return (h%12||12)+':'+String(m).padStart(2,'0')+' '+ap; };
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+
+  /* ---------- NAV ---------- */
+  const header = $('#header'), burger = $('#burger'), menu = $('#menu'), toTop = $('#toTop');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', scrollY > 30);
+    toTop.classList.toggle('show', scrollY > 600);
+    highlightNav();
+  }, {passive:true});
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  $$('#menu a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded', false);
+  }));
+  toTop.addEventListener('click', () => scrollTo({top:0, behavior:'smooth'}));
+  const navLinks = $$('#menu a:not(.btn)'), sections = navLinks.map(a => $(a.getAttribute('href')));
+  function highlightNav(){
+    const y = scrollY + 120; let cur = 0;
+    sections.forEach((s,i)=>{ if(s && s.offsetTop <= y) cur = i; });
+    navLinks.forEach((a,i)=>a.classList.toggle('active', i===cur));
+  }
+  highlightNav();
+
+  /* ---------- OPEN / CLOSED STATUS ---------- */
+  function updateStatus(){
+    const now = new Date(), h = HOURS[now.getDay()], cur = now.getHours() + now.getMinutes()/60;
+    const el = $('#status'), tx = $('#statusText');
+    if(cur >= h.o && cur < h.c){
+      el.className = 'status open'; tx.textContent = 'Open now · closes ' + fmtH(h.c);
+    } else {
+      el.className = 'status closed';
+      tx.textContent = cur < h.o ? 'Closed · opens today ' + fmtH(h.o) : 'Closed · opens tomorrow ' + fmtH(HOURS[(now.getDay()+1)%7].o);
+    }
+  }
+  updateStatus(); setInterval(updateStatus, 60000);
+
+  /* ---------- HOURS LIST ---------- */
+  const order = [1,2,3,4,5,6,0], todayIdx = new Date().getDay();
+  $('#hoursList').innerHTML = order.map(i =>
+    `<li class="${i===todayIdx?'today':''}"><span>${HOURS[i].d}</span><span>${fmtH(HOURS[i].o)} – ${fmtH(HOURS[i].c)}</span></li>`).join('');
+
+  /* ---------- SERVICES ---------- */
+  const grid = $('#serviceGrid');
+  grid.innerHTML = SERVICES.map(s => `
+    <article class="service reveal" data-c="${s.c}">
+      <div class="row"><h3>${s.n}</h3><div class="price">${peso(s.p)}</div></div>
+      <p>${s.d}</p>
+      <small>${s.t}</small>
+    </article>`).join('');
+  $('#tabs').addEventListener('click', e => {
+    const b = e.target.closest('.tab'); if(!b) return;
+    $$('.tab').forEach(t => t.classList.toggle('active', t===b));
+    $$('.service').forEach(s => s.classList.toggle('hide', b.dataset.f !== 'all' && s.dataset.c !== b.dataset.f));
+  });
+
+  /* ---------- BOOKING FORM ---------- */
+  const svc = $('#service'), dateIn = $('#date'), slotsBox = $('#slots'), summary = $('#summary');
+  svc.innerHTML = '<option value="">Select service</option>' + SERVICES.map(s=>`<option value="${s.n}">${s.n} — ${peso(s.p)}</option>`).join('');
+
+  const pad = n => String(n).padStart(2,'0');
+  const toISO = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  const today = new Date(); dateIn.min = toISO(today);
+  const maxD = new Date(); maxD.setDate(maxD.getDate()+60); dateIn.max = toISO(maxD);
+
+  let selectedTime = '';
+  function buildSlots(){
+    selectedTime = ''; slotsBox.innerHTML = '';
+    if(!dateIn.value){ slotsBox.innerHTML = '<p style="grid-column:1/-1;color:var(--muted);font-size:.88rem">Choose a date to see available times.</p>'; updateSummary(); return; }
+    const [y,m,d] = dateIn.value.split('-').map(Number);
+    const date = new Date(y,m-1,d), h = HOURS[date.getDay()], now = new Date();
+    const isToday = toISO(now) === dateIn.value;
+    for(let hr = h.o; hr < h.c; hr++){
+      [0,30].forEach(min => {
+        const b = document.createElement('button');
+        b.type='button'; b.className='slot'; b.textContent = fmtSlot(hr,min);
+        const past = isToday && (hr + min/60) <= now.getHours() + now.getMinutes()/60 + 0.5;
+        // deterministic pseudo "already booked" slots so the UI feels real
+        const seed = (y*372 + m*31 + d + hr*7 + min) % 9;
+        if(past || seed === 0) b.disabled = true;
+        b.addEventListener('click', () => {
+          $$('.slot').forEach(s=>s.classList.remove('sel')); b.classList.add('sel');
+          selectedTime = b.textContent; setErr('time',''); updateSummary();
+        });
+        slotsBox.appendChild(b);
+      });
+    }
+    if(!$$('.slot:not(:disabled)').length) slotsBox.innerHTML = '<p style="grid-column:1/-1;color:var(--muted);font-size:.88rem">No slots left on this day. Please pick another date.</p>';
+    updateSummary();
+  }
+  dateIn.addEventListener('change', () => { setErr('date',''); buildSlots(); });
+  buildSlots();
+
+  function prettyDate(){
+    if(!dateIn.value) return '';
+    const [y,m,d] = dateIn.value.split('-').map(Number);
+    return new Date(y,m-1,d).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+  }
+  function updateSummary(){
+    const s = SERVICES.find(x=>x.n===svc.value);
+    if(!s){ summary.style.display='none'; return; }
+    summary.style.display='block';
+    summary.innerHTML = `<b>${s.n}</b> · ${s.t} · <b>${peso(s.p)}</b>` +
+      (dateIn.value ? `<br>${prettyDate()}${selectedTime?' at <b>'+selectedTime+'</b>':''}` : '');
+  }
+  svc.addEventListener('change', () => { setErr('service',''); updateSummary(); });
+  $('#barber').addEventListener('change', () => setErr('barber',''));
+  $('#name').addEventListener('input', () => setErr('name',''));
+  $('#phone').addEventListener('input', () => setErr('phone',''));
+
+  function setErr(k,msg){ const e = document.querySelector(`.err[data-for="${k}"]`); if(e) e.textContent = msg; }
+
+  $('#bookForm').addEventListener('submit', e => {
+    e.preventDefault();
+    let ok = true, first = null;
+    const fail = (k,msg,el) => { setErr(k,msg); ok=false; if(!first) first = el; };
+    const name = $('#name').value.trim(), phone = $('#phone').value.replace(/[\s-]/g,'');
+    if(name.length < 2) fail('name','Please enter your name.', $('#name'));
+    if(!/^(\+?63|0)9\d{9}$/.test(phone) && !/^\+?\d{7,15}$/.test(phone)) fail('phone','Enter a valid phone number.', $('#phone'));
+    if(!svc.value) fail('service','Choose a service.', svc);
+    if(!$('#barber').value) fail('barber','Choose a barber.', $('#barber'));
+    if(!dateIn.value) fail('date','Pick a date.', dateIn);
+    else if(!selectedTime) fail('time','Pick a time slot.', slotsBox);
+    if(!ok){ first.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+
+    const booking = { name, phone, service:svc.value, barber:$('#barber').value, date:dateIn.value, time:selectedTime };
+    try{
+      const all = JSON.parse(localStorage.getItem('sidBookings')||'[]'); all.push(booking);
+      localStorage.setItem('sidBookings', JSON.stringify(all));
+    }catch(_){}
+    $('#successMsg').innerHTML = `Thanks, <b>${name.replace(/</g,'&lt;')}</b>! Your <b>${booking.service}</b> with <b>${booking.barber}</b> is set for <b>${prettyDate()}</b> at <b>${booking.time}</b>. See you at the shop!`;
+    $('#bookForm').style.display='none'; $('#success').style.display='block';
+    $('#booking').scrollIntoView({behavior:'smooth'});
+  });
+  $('#again').addEventListener('click', () => {
+    $('#bookForm').reset(); $('#bookForm').style.display='block'; $('#success').style.display='none';
+    buildSlots();
+  });
+
+  /* ---------- REVEAL ON SCROLL ---------- */
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+  }), {threshold:.12});
+  $$('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- COUNTERS ---------- */
+  const cio = new IntersectionObserver(entries => entries.forEach(en => {
+    if(!en.isIntersecting) return;
+    const el = en.target, end = +el.dataset.count, plus = el.dataset.plus ? '+' : '', dur = 1400, t0 = performance.now();
+    (function tick(t){
+      const p = Math.min((t-t0)/dur,1), eased = 1-Math.pow(1-p,3);
+      el.textContent = Math.round(end*eased).toLocaleString() + (p===1?plus:'');
+      if(p<1) requestAnimationFrame(tick);
+    })(t0);
+    cio.unobserve(el);
+  }), {threshold:.6});
+  $$('[data-count]').forEach(el => cio.observe(el));
+
+  $('#year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
